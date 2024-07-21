@@ -1,51 +1,73 @@
-<html>
-<script src='https://d3js.org/d3.v5.min.js'></script>
-<style> circle {fill: lightblue; stroke: black;} </style>
-<body onload='init()'>
-<svg width=300 height=300>
-</svg>
-<script>
-async function init() {
-    const data = await d3.csv('https://flunky.github.io/cars2017.csv');
-    // Convert relevant fields to numbers
-    data.forEach(d => {
-    d.AverageCityMPG = +d.AverageCityMPG; // Convert to number
-    d.AverageHighwayMPG = +d.AverageHighwayMPG; // Convert to number
-    d.EngineCylinders = +d.EngineCylinders; // Convert to number
-    });
-    var svgWidth = 300, svgHeight = 300;
-    var margin = {top: 50, right: 50, bottom: 50, left: 50};
-    var width = svgWidth - margin.left - margin.right;
-    var height = svgHeight - margin.top - margin.bottom;
-    var svg = d3.select("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    // Logarithmic scales
-    const xScale = d3.scaleLog()
-    .domain([10, 150])
-    .range([0, width]);
-
-    const yScale = d3.scaleLog()
-    .domain([10, 150])
-    .range([height, 0]);
-    var circles = svg.selectAll('circle')
-    .data(data)
-    .enter().append('circle')
-        .attr('cx', d => xScale(d.AverageCityMPG))
-        .attr('cy', d => yScale(d.AverageHighwayMPG))
-        .attr('r', d => 2 + d.EngineCylinders)
-    // Axes
-
-    var yAxis = d3.axisLeft(yScale).tickValues([10, 20, 50, 100])
-    .tickFormat(d3.format("~s"));
-    svg.append('g').attr('transform', 'translate(50,50)') .call(yAxis);
-
-    var xAxis = d3.axisBottom(xScale).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s"));
-    svg.append('g').attr('transform', 'translate(50,250)') .call(xAxis);
-}
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Insights - Explore the Trends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 2em;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin: 0 0 0.5em;
+        }
+        h2 {
+            color: #555;
+            font-size: 1.5em;
+            margin: 0 0 1em;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5em;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #begin-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75em 1.5em;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #begin-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Narrative Visualization - </h1>
+        <h2>by Ajay Ramsunder</h2>
+        <p></a>.</p>
+        <button id="begin-button">Get Started</button>
+    </div>
+    <script src="js/index.js"></script>
 </body>
 </html>
+
