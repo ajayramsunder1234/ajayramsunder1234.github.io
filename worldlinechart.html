@@ -69,14 +69,26 @@
                .call(d3.axisLeft(y));
 
             // Add the line
-            svg.append("path")
-               .datum(worldData)
-               .attr("fill", "none")
-               .attr("stroke", "steelblue")
-               .attr("stroke-width", 1.5)
-               .attr("d", d3.line()
-                             .x(d => x(d.Year))
-                             .y(d => y(d.Education)));
+            const line = d3.line()
+                           .x(d => x(d.Year))
+                           .y(d => y(d.Education));
+
+            const path = svg.append("path")
+                            .datum(worldData)
+                            .attr("fill", "none")
+                            .attr("stroke", "steelblue")
+                            .attr("stroke-width", 1.5)
+                            .attr("d", line);
+
+            // Animation
+            const totalLength = path.node().getTotalLength();
+
+            path.attr("stroke-dasharray", totalLength + " " + totalLength)
+                .attr("stroke-dashoffset", totalLength)
+                .transition()
+                .duration(4000)
+                .ease(d3.easeLinear)
+                .attr("stroke-dashoffset", 0);
         });
     </script>
 </body>
