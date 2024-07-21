@@ -41,9 +41,9 @@
                       .attr("transform", `translate(${margin.left},${margin.top})`);
 
         // Load the data
-        d3.csv("mean-years-of-schooling-long-run.csv", function(data) {
+        d3.csv("mean-years-of-schooling-long-run.csv").then(data => {
             // Filter the data to include only the World entity from 1870 to 2020
-            const worldData = data.filter(d => d.Entity === "World" && +d.Year >= 1870 && +d.Year <= 2020);
+            const worldData = data.filter(d => d.Entity === "World");
 
             // Parse the data
             worldData.forEach(d => {
