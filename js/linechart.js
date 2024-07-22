@@ -1,4 +1,4 @@
-const margin = { top: 20, right: 150, bottom: 50, left: 50 },
+const margin = { top: 20, right: 50, bottom: 50, left: 50 },
               width = 800 - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
 
@@ -9,27 +9,30 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                       .attr("height", height + margin.top + margin.bottom)
                       .append("g")
                       .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Colors for the World data
+        const color = "steelblue";
+
+        // Tooltip div
         const tooltip = d3.select("body").append("div")
-                      .attr("class", "tooltip")
-                      .style("opacity", 0);
+                          .attr("class", "tooltip")
+                          .style("opacity", 0);
 
         // Load the data
-        d3.csv("data/mean-years-of-schooling-long-run.csv").then(data => {
-            // Filter data for the required entities
-            const worldData = data.filter(d => d.Entity === "World");
-
-            // Parse the data
-            worldData.forEach(d => {
-                d.Year = +d.Year;
-                d.Education = +d["Combined - average years of education for 15-64 years male and female youth and adults"];
-            });
+        d3.csv("mean-years-of-schooling-long-run.csv").then(data => {
+            // Filter data for the World
+            const filteredData = data.filter(d => d.Entity === "World" && +d.Year >= 1870 && +d.Year <= 2020)
+                                     .map(d => ({
+                                         Year: +d.Year,
+                                         Education: +d["Combined - average years of education for 15-64 years male and female youth and adults"]
+                                     }));
 
             // Set the scales
             const x = d3.scaleTime()
-                        .domain(d3.extent(worldData, d => d.Year))
+                        .domain(d3.extent(filteredData, d => d.Year))
                         .range([0, width]);
             const y = d3.scaleLinear()
-                        .domain([0, d3.max(worldData, d => d.Education)])
+                        .domain([0, d3.max(filteredData, d => d.Education)])
                         .range([height, 0]);
 
             // Add the X axis
@@ -56,15 +59,15 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                .attr("y", -margin.left + 20)
                .text("Average Years of Education");
 
-            // Add the lines and dots for each entity
+            // Add the line
             const line = d3.line()
                            .x(d => x(d.Year))
                            .y(d => y(d.Education));
 
             const path = svg.append("path")
-                            .datum(worldData)
+                            .datum(filteredData)
                             .attr("fill", "none")
-                            .attr("stroke", "steelblue")
+                            .attr("stroke", color)
                             .attr("stroke-width", 1.5)
                             .attr("d", line);
 
@@ -80,49 +83,29 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
 
             // Add dots
             svg.selectAll("dot")
-               .data(worldData)
+               .data(filteredData)
                .enter()
                .append("circle")
                .attr("cx", d => x(d.Year))
                .attr("cy", d => y(d.Education))
                .attr("r", 5)
-               .attr("fill", "steelblue")
-                .on("mouseover", (event, d) => {
-                tooltip.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                tooltip.html(`Year: ${d.Year}<br/>Education: ${d.Education}`)
-                        .style("left", (event.pageX + 5) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-                })
-                .on("mouseout", () => {
-                        tooltip.transition()
-                            .duration(500)
-                            .style("opacity", 0);
-                })
-                .attr("opacity", 0)
-                .transition()
-                .delay((d, i) => i * 100)
-                .duration(500)
-                .attr("opacity", 1);
-            });
-
-            // // Add legend
-            // const legend = svg.selectAll(".legend")
-            //                   .data(entities)
-            //                   .enter().append("g")
-            //                   .attr("class", "legend")
-            //                   .attr("transform", (d, i) => `translate(100,${i * 20})`);
-
-            // legend.append("rect")
-            //       .attr("x", width)
-            //       .attr("width", 18)
-            //       .attr("height", 18)
-            //       .style("fill", d => colors[d]);
-
-            // legend.append("text")
-            //       .attr("x", width - 10)
-            //       .attr("y", 9)
-            //       .attr("dy", ".35em")
-            //       .style("text-anchor", "end")
-            //       .text(d => d);
+               .attr("fill", color)
+               .on("mouseover", (event, d) => {
+                    tooltip.transition()
+                           .duration(200)
+                           .style("opacity", .9);
+                    tooltip.html(`Year: ${d.Year}<br/>Education: ${d.Education}`)
+                           .style("left", (event.pageX + 5) + "px")
+                           .style("top", (event.pageY - 28) + "px");
+               })
+               .on("mouseout", () => {
+                    tooltip.transition()
+                           .duration(500)
+                           .style("opacity", 0);
+               })
+               .attr("opacity", 0)
+               .transition()
+               .delay((d, i) => i * 100)
+               .duration(500)
+               .attr("opacity", 1);
+        });
