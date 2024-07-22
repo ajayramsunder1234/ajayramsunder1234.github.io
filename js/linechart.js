@@ -28,10 +28,10 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
 
             // Set the scales
             const x = d3.scaleTime()
-                        .domain(d3.extent(filteredData[0].data, d => d.Year))
+                        .domain(d3.extent(worldData, d => d.Year))
                         .range([0, width]);
             const y = d3.scaleLinear()
-                        .domain([0, d3.max(filteredData.flatMap(d => d.data), d => d.Education)])
+                        .domain([0, d3.max(worldData, d => d.Education)])
                         .range([height, 0]);
 
             // Add the X axis
