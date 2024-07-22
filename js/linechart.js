@@ -19,7 +19,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
                           .style("opacity", 0);
 
         // Load the data
-        d3.csv("mean-years-of-schooling-long-run.csv").then(data => {
+        d3.csv("data/mean-years-of-schooling-long-run.csv").then(data => {
             // Filter data for the World
             const filteredData = data.filter(d => d.Entity === "World" && +d.Year >= 1870 && +d.Year <= 2020)
                                      .map(d => ({
