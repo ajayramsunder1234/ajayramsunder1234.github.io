@@ -16,15 +16,13 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
         // Load the data
         d3.csv("data/mean-years-of-schooling-long-run.csv").then(data => {
             // Filter data for the required entities
-            const entities = ["World"];
-            const worldData = entities.map(entity => ({
-                entity: entity,
-                data: data.filter(d => d.Entity === entity)
-                          .map(d => ({
-                              Year: +d.Year,
-                              Education: +d["Combined - average years of education for 15-64 years male and female youth and adults"]
-                          }))
-            }));
+            const worldData = data.filter(d => d.Entity === "World");
+
+            // Parse the data
+            worldData.forEach(d => {
+                d.Year = +d.Year;
+                d.Education = +d["Combined - average years of education for 15-64 years male and female youth and adults"];
+            });
 
             // Set the scales
             const x = d3.scaleTime()
