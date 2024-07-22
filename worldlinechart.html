@@ -25,9 +25,30 @@
         .legend {
             font-size: 12px;
         }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: 80px;
+            height: 40px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    <div id="annotation">
+        <p>This chart displays the average years of education for the World and each continent from 1870 to 2020.
+             The data shows trends and changes in educational attainment over time, highlighting significant increases 
+             and regional disparities.</p>
+        <p>From the chart, it can be seen that the average years of education in the World has increased over time. It can 
+            also be seen that while some regions had major jumps in average years of education, others had less. This can be
+            indicative of the development levels in these regions.  
+        </p>
+    </div>
     <div id="chart"></div>
     <script src="js/linechart.js"></script>
 </body>

@@ -9,6 +9,9 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                       .attr("height", height + margin.top + margin.bottom)
                       .append("g")
                       .attr("transform", `translate(${margin.left},${margin.top})`);
+        const tooltip = d3.select("body").append("div")
+                      .attr("class", "tooltip")
+                      .style("opacity", 0);
 
         // Colors for each continent
         const colors = {
@@ -22,7 +25,7 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
         };
 
         // Load the data
-        d3.csv("mean-years-of-schooling-long-run.csv").then(data => {
+        d3.csv("data/mean-years-of-schooling-long-run.csv").then(data => {
             // Filter data for the required entities
             const entities = ["World", "Africa", "Asia", "Europe", "North America", "Oceania", "South America"];
             const filteredData = entities.map(entity => ({
@@ -99,6 +102,19 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                    .attr("cy", d => y(d.Education))
                    .attr("r", 5)
                    .attr("fill", colors[group.entity])
+                   .on("mouseover", (event, d) => {
+                    tooltip.transition()
+                           .duration(200)
+                           .style("opacity", .9);
+                    tooltip.html(`Year: ${d.Year}<br/>Education: ${d.Education}`)
+                           .style("left", (event.pageX + 5) + "px")
+                           .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", () => {
+                            tooltip.transition()
+                                .duration(500)
+                                .style("opacity", 0);
+                    })
                    .attr("opacity", 0)
                    .transition()
                    .delay((d, i) => i * 100)
@@ -111,7 +127,7 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                               .data(entities)
                               .enter().append("g")
                               .attr("class", "legend")
-                              .attr("transform", (d, i) => `translate(50,${i * 20})`);
+                              .attr("transform", (d, i) => `translate(200,${i * 20})`);
 
             legend.append("rect")
                   .attr("x", width)
