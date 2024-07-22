@@ -106,7 +106,7 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                     tooltip.transition()
                            .duration(200)
                            .style("opacity", .9);
-                    tooltip.html(`Year: ${d.Year}<br/>Education: ${d.Education}`)
+                    tooltip.html(`Region: ${d.Entity}<br/>Year: ${d.Year}<br/>Education: ${d.Education}`)
                            .style("left", (event.pageX + 5) + "px")
                            .style("top", (event.pageY - 28) + "px");
                     })
