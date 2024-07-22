@@ -17,7 +17,7 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
         d3.csv("data/mean-years-of-schooling-long-run.csv").then(data => {
             // Filter data for the required entities
             const entities = ["World"];
-            const filteredData = entities.map(entity => ({
+            const worldData = entities.map(entity => ({
                 entity: entity,
                 data: data.filter(d => d.Entity === entity)
                           .map(d => ({
