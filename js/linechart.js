@@ -59,56 +59,54 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                .text("Average Years of Education");
 
             // Add the lines and dots for each entity
-            filteredData.forEach(group => {
-                // Add the line
-                const line = d3.line()
-                               .x(d => x(d.Year))
-                               .y(d => y(d.Education));
+            const line = d3.line()
+                           .x(d => x(d.Year))
+                           .y(d => y(d.Education));
 
-                const path = svg.append("path")
-                                .datum(group.data)
-                                .attr("fill", "none")
-                                .attr("stroke", colors[group.entity])
-                                .attr("stroke-width", 1.5)
-                                .attr("d", line);
+            const path = svg.append("path")
+                            .datum(worldData)
+                            .attr("fill", "none")
+                            .attr("stroke", "steelblue")
+                            .attr("stroke-width", 1.5)
+                            .attr("d", line);
 
-                // Animation
-                const totalLength = path.node().getTotalLength();
+            // Animation
+            const totalLength = path.node().getTotalLength();
 
-                path.attr("stroke-dasharray", totalLength + " " + totalLength)
-                    .attr("stroke-dashoffset", totalLength)
-                    .transition()
-                    .duration(4000)
-                    .ease(d3.easeLinear)
-                    .attr("stroke-dashoffset", 0);
+            path.attr("stroke-dasharray", totalLength + " " + totalLength)
+                .attr("stroke-dashoffset", totalLength)
+                .transition()
+                .duration(4000)
+                .ease(d3.easeLinear)
+                .attr("stroke-dashoffset", 0);
 
-                // Add dots
-                svg.selectAll(`dot-${group.entity}`)
-                   .data(group.data)
-                   .enter()
-                   .append("circle")
-                   .attr("cx", d => x(d.Year))
-                   .attr("cy", d => y(d.Education))
-                   .attr("r", 5)
-                   .attr("fill", colors[group.entity])
-                   .on("mouseover", (event, d) => {
-                    tooltip.transition()
-                           .duration(200)
-                           .style("opacity", .9);
-                    tooltip.html(`Year: ${d.Year}<br/>Education: ${d.Education}`)
-                           .style("left", (event.pageX + 5) + "px")
-                           .style("top", (event.pageY - 28) + "px");
-                    })
-                    .on("mouseout", () => {
-                            tooltip.transition()
-                                .duration(500)
-                                .style("opacity", 0);
-                    })
-                   .attr("opacity", 0)
-                   .transition()
-                   .delay((d, i) => i * 100)
-                   .duration(500)
-                   .attr("opacity", 1);
+            // Add dots
+            svg.selectAll("dot")
+               .data(worldData)
+               .enter()
+               .append("circle")
+               .attr("cx", d => x(d.Year))
+               .attr("cy", d => y(d.Education))
+               .attr("r", 5)
+               .attr("fill", "steelblue")
+                .on("mouseover", (event, d) => {
+                tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                tooltip.html(`Year: ${d.Year}<br/>Education: ${d.Education}`)
+                        .style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", () => {
+                        tooltip.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                })
+                .attr("opacity", 0)
+                .transition()
+                .delay((d, i) => i * 100)
+                .duration(500)
+                .attr("opacity", 1);
             });
 
             // // Add legend
@@ -130,4 +128,3 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
             //       .attr("dy", ".35em")
             //       .style("text-anchor", "end")
             //       .text(d => d);
-        });
