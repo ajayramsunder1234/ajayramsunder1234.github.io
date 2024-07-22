@@ -13,21 +13,10 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                       .attr("class", "tooltip")
                       .style("opacity", 0);
 
-        // Colors for each continent
-        const colors = {
-            "World": "steelblue",
-            "Africa": "orange",
-            "Asia": "green",
-            "Europe": "red",
-            "North America": "purple",
-            "Oceania": "brown",
-            "South America": "pink"
-        };
-
         // Load the data
         d3.csv("data/mean-years-of-schooling-long-run.csv").then(data => {
             // Filter data for the required entities
-            const entities = ["World", "Africa", "Asia", "Europe", "North America", "Oceania", "South America"];
+            const entities = ["World"];
             const filteredData = entities.map(entity => ({
                 entity: entity,
                 data: data.filter(d => d.Entity === entity)
@@ -106,7 +95,7 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                     tooltip.transition()
                            .duration(200)
                            .style("opacity", .9);
-                    tooltip.html(`Region: ${d.Entity}<br/>Year: ${d.Year}<br/>Education: ${d.Education}`)
+                    tooltip.html(`Year: ${d.Year}<br/>Education: ${d.Education}`)
                            .style("left", (event.pageX + 5) + "px")
                            .style("top", (event.pageY - 28) + "px");
                     })
@@ -122,23 +111,23 @@ const margin = { top: 20, right: 150, bottom: 50, left: 50 },
                    .attr("opacity", 1);
             });
 
-            // Add legend
-            const legend = svg.selectAll(".legend")
-                              .data(entities)
-                              .enter().append("g")
-                              .attr("class", "legend")
-                              .attr("transform", (d, i) => `translate(200,${i * 20})`);
+            // // Add legend
+            // const legend = svg.selectAll(".legend")
+            //                   .data(entities)
+            //                   .enter().append("g")
+            //                   .attr("class", "legend")
+            //                   .attr("transform", (d, i) => `translate(100,${i * 20})`);
 
-            legend.append("rect")
-                  .attr("x", width)
-                  .attr("width", 18)
-                  .attr("height", 18)
-                  .style("fill", d => colors[d]);
+            // legend.append("rect")
+            //       .attr("x", width)
+            //       .attr("width", 18)
+            //       .attr("height", 18)
+            //       .style("fill", d => colors[d]);
 
-            legend.append("text")
-                  .attr("x", width - 10)
-                  .attr("y", 9)
-                  .attr("dy", ".35em")
-                  .style("text-anchor", "end")
-                  .text(d => d);
+            // legend.append("text")
+            //       .attr("x", width - 10)
+            //       .attr("y", 9)
+            //       .attr("dy", ".35em")
+            //       .style("text-anchor", "end")
+            //       .text(d => d);
         });
