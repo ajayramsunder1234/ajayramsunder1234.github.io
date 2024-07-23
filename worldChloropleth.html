@@ -67,14 +67,27 @@
         // Load external data and boot
         Promise.all([
             d3.json("https://unpkg.com/world-atlas@2/countries-110m.json"),
-            d3.csv("data/mean-years-of-schooling-long-run.csv", function(d) {
-                if (d.Year === "2020") {
-                    data.set(d.Code, +d["Combined - average years of education for 15-64 years male and female youth and adults"]);
-                }
-            })
+            d3.csv("data/mean-years-of-schooling-long-run.csv"),
+            d3.json("regioncode.json")
         ]).then(loadData);
 
-        function loadData([topo, csvData]) {
+        function loadData([topo, csvData, countriesJson]) {
+            // Create a mapping from Alpha-3 codes to numeric region codes
+            const alpha3ToNumeric = new Map();
+            countriesJson.forEach(country => {
+                alpha3ToNumeric.set(country["alpha-3"], country["country-code"]);
+            });
+
+            // Initialize data map
+            const data = new Map();
+            csvData.forEach(d => {
+                if (d.Year === "2020") {
+                    const numericCode = alpha3ToNumeric.get(d.Code);
+                    if (numericCode) {
+                        data.set(numericCode, +d["Combined - average years of education for 15-64 years male and female youth and adults"]);
+                    }
+                }
+            });
             // Convert TopoJSON to GeoJSON
             const countries = topojson.feature(topo, topo.objects.countries).features;
 
