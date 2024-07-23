@@ -52,20 +52,47 @@
             border: 1px solid #ccc;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        #next-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75em 1.5em;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #next-button:hover {
+            background: #0056b3;
+        }
+        #back-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75em 1.5em;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #back-button:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
+    <h1>World Average Years of Schooling (1870-2020)</h1>
     <div id="chart-container">
         <div id="chart"></div>
         <div id="annotation">
             <p>This chart displays the average years of education for the World and each continent from 1870 to 2020.
-                The data shows trends and changes in educational attainment over time, highlighting significant increases 
-                and regional disparities.</p>
-            <p>From the chart, it can be seen that the average years of education in the World has increased over time. It can 
-                also be seen that while some regions had major jumps in average years of education, others had less. This can be
-                indicative of the development levels in these regions.  
+                The data shows trends and changes in educational attainment over time, highlighting significant increases.</p>
+            <p>From the chart, it can be seen that the average years of education in the World has increased over time and that
+                has occured most likely due to the increasing development of countries through the years.  
             </p>
         </div>
+        <button id="next-button">Next</button>
+        <button id="back-button">Back</button>
     </div>
     <script src="js/linechart.js"></script>
 </body>

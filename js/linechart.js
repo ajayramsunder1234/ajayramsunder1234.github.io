@@ -1,3 +1,9 @@
+document.getElementById("next-button").addEventListener("click", function() {
+    window.location.href = "worldChloropleth.html";
+});
+document.getElementById("back-button").addEventListener("click", function() {
+    window.location.href = "index.html";
+});
 const margin = { top: 20, right: 50, bottom: 50, left: 50 },
               width = 800 - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
