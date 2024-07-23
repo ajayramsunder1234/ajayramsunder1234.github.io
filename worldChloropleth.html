@@ -67,7 +67,7 @@
         // Load external data and boot
         Promise.all([
             d3.json("https://unpkg.com/world-atlas@2/countries-110m.json"),
-            d3.csv("/mnt/data/mean-years-of-schooling-long-run.csv", function(d) {
+            d3.csv("data/mean-years-of-schooling-long-run.csv", function(d) {
                 if (d.Year === "2020") {
                     data.set(d.Code, +d["Combined - average years of education for 15-64 years male and female youth and adults"]);
                 }
