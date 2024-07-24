@@ -98,7 +98,7 @@ function loadData([topo, csvData, countriesJson]) {
     const legendHeight = 10;
     const legendMargin = 20;
     const legendX = width - legendWidth - legendMargin;
-    const legendY = height - legendHeight - legendMargin;
+    const legendY = height - legendHeight - (legendMargin + 50);
 
     const legendScale = d3.scaleLinear()
                           .domain([0, 20])
@@ -115,7 +115,7 @@ function loadData([topo, csvData, countriesJson]) {
           .style("fill", d => colorScale(d[0]));
 
     legend.append("g")
-          .attr("transform", `translate(${legendX}, ${legendY + legendHeight + 10})`)
+          .attr("transform", `translate(${legendX}, ${legendY + legendHeight})`)
           .call(d3.axisBottom(legendScale)
                 .tickSize(13)
                 .tickValues(colorScale.domain()));
