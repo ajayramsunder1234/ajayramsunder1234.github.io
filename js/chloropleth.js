@@ -2,7 +2,7 @@ document.getElementById("next-button").addEventListener("click", function() {
     window.location.href = "countrylinechart.html";
 });
 document.getElementById("back-button").addEventListener("click", function() {
-    window.location.href = "worldChloropleth.html";
+    window.location.href = "worldlinechart.html";
 });
 // Dimensions and margins of the graph
 const width = 960, height = 600;
