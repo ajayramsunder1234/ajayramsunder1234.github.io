@@ -127,11 +127,9 @@
                 width = 960 - margin.left - margin.right,
                 height = 500 - margin.top - margin.bottom;
 
-            // Remove existing SVG if any
-            d3.select("#chart-container").selectAll("*").remove();
 
             // Append the svg object to the chart container
-            const svg = d3.select("#chart-container")
+            const svg = d3.select("#chart")
                 .append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
