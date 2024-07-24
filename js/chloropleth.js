@@ -115,7 +115,7 @@ function loadData([topo, csvData, countriesJson]) {
           .style("fill", d => colorScale(d[0]));
 
     legend.append("g")
-          .attr("transform", `translate(${legendX}, ${legendY + legendHeight})`)
+          .attr("transform", `translate(${legendX}, ${legendY + legendHeight + 10})`)
           .call(d3.axisBottom(legendScale)
                 .tickSize(13)
                 .tickValues(colorScale.domain()));
