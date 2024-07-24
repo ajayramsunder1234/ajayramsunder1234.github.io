@@ -132,10 +132,4 @@ function createLineChart(data, country) {
         .attr("y", y(annotationData.Education) - 10)
         .attr("fill", "black")
         .text("Hover over points for data tooltip");
-    svg.append("line")
-        .attr("x1", x(annotationData.Year))
-        .attr("y1", y(annotationData.Education))
-        .attr("x2", x(annotationData.Year) + 10)
-        .attr("y2", y(annotationData.Education) - 10)
-        .attr("stroke", "black");
 }

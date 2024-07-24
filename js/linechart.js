@@ -118,7 +118,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
                const annotationData = filteredData.find(d => d.Year === 1950);
 
                svg.append("text")
-                  .attr("x", x(annotationData.Year) - 120) // Adjusted x position
+                  .attr("x", x(annotationData.Year) - 200) // Adjusted x position
                   .attr("y", y(annotationData.Education) - 10)
                   .attr("fill", "black")
                   .text("Hover over points for data tooltip");
@@ -126,8 +126,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
                svg.append("line")
                   .attr("x1", x(annotationData.Year))
                   .attr("y1", y(annotationData.Education))
-                  .attr("x2", x(annotationData.Year) - 110) // Adjusted x2 position
+                  .attr("x2", x(annotationData.Year) - 190) // Adjusted x2 position
                   .attr("y2", y(annotationData.Education) - 10)
                   .attr("stroke", "black");
-   
         });
