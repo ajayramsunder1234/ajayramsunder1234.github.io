@@ -27,6 +27,11 @@
             flex-direction: column;
             align-items: center;
         }
+        #map {
+            width: 100%;
+            height: 400px;
+            justify-content: center;
+        }
         .tooltip {
             position: absolute;
             text-align: center;
@@ -68,6 +73,7 @@
 <body>
     <div id="map-container">
         <h1>World Choropleth - Mean Years of Schooling (2020)</h1>
+        <div id="map"></div>
         <div id="annotation">
             <p>This chart displays the average years of education for every single country in the World for 2020. The darker blue indicates 
                 a higher value while a lighter blue to white indicates a lower value.
