@@ -62,7 +62,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
                .attr("text-anchor", "end")
                .attr("transform", "rotate(-90)")
                .attr("x", -height / 2)
-               .attr("y", -margin.left + 20)
+               .attr("y", -margin.left + 50)
                .text("Average Years of Education");
 
             // Add the line
