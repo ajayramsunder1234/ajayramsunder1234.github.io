@@ -83,7 +83,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
             path.attr("stroke-dasharray", totalLength + " " + totalLength)
                 .attr("stroke-dashoffset", totalLength)
                 .transition()
-                .duration(4000)
+                .duration(1200)
                 .ease(d3.easeLinear)
                 .attr("stroke-dashoffset", 0);
 
@@ -122,4 +122,32 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
                   .attr("y", y(annotationData.Education) - 10)
                   .attr("fill", "black")
                   .text("Hover over points for data tooltip");
+               
+               const annotationDataHighest = filteredData.find(d => d.Year === 2020);
+
+                svg.append("text")
+                    .attr("x", x(annotationDataHighest.Year) - 250) // Adjusted x position
+                    .attr("y", y(annotationDataHighest.Education) - 10)
+                    .attr("fill", "black")
+                    .text(`2020 Education value: ${annotationDataHighest.Education}`);
+                svg.append("line")
+                    .attr("x1", x(annotationDataHighest.Year))
+                    .attr("y1", y(annotationDataHighest.Education))
+                    .attr("x2", x(annotationDataHighest.Year) + 240)
+                    .attr("y2", y(annotationDataHighest.Education) - 10)
+                    .attr("stroke", "black");
+
+                const annotationDataLowest = filteredData.find(d => d.Year === 1915);
+
+                    svg.append("text")
+                        .attr("x", x(annotationDataLowest.Year) - 250) // Adjusted x position
+                        .attr("y", y(annotationDataLowest.Education) - 10)
+                        .attr("fill", "black")
+                        .text(`1915 Education value: ${annotationDataLowest.Education}`);
+                    svg.append("line")
+                        .attr("x1", x(annotationDataLowest.Year))
+                        .attr("y1", y(annotationDataLowest.Education))
+                        .attr("x2", x(annotationDataLowest.Year) + 240)
+                        .attr("y2", y(annotationDataLowest.Education) - 10)
+                        .attr("stroke", "black");
         });
