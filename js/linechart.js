@@ -148,7 +148,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
 
                 const annotationDataHighest = filteredData.find(d => d.Year === 2020);
                 svg.append("text")
-                .attr("x", x(annotationDataHighest.Year) - 260) // Adjusted x position
+                .attr("x", x(annotationDataHighest.Year) - 270) // Adjusted x position
                 .attr("y", y(annotationDataHighest.Education) + 20)
                 .attr("fill", "black")
                 .text(`2020 Education value: ${annotationDataHighest.Education}`)
@@ -162,7 +162,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
 
                 const annotationDataLowest = filteredData.find(d => d.Year === 1915);
                 svg.append("text")
-                .attr("x", x(annotationDataLowest.Year) + 10) // Adjusted x position
+                .attr("x", x(annotationDataLowest.Year) + 30) // Adjusted x position
                 .attr("y", y(annotationDataLowest.Education) + 20)
                 .attr("fill", "black")
                 .text(`1915 Education value: ${annotationDataLowest.Education}`)
