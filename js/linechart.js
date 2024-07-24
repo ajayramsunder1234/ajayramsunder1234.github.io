@@ -114,4 +114,18 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
                .delay((d, i) => i * 100)
                .duration(500)
                .attr("opacity", 1);
+               
+               const annotationData = filteredData.find(d => d.Year === 1950);
+               
+               svg.append("text")
+                  .attr("x", x(annotationData.Year) + 10)
+                  .attr("y", y(annotationData.Education) - 10)
+                  .attr("fill", "black")
+                  .text("Hover over points for data tooltip");
+               svg.append("line")
+                  .attr("x1", x(annotationData.Year))
+                  .attr("y1", y(annotationData.Education))
+                  .attr("x2", x(annotationData.Year) + 10)
+                  .attr("y2", y(annotationData.Education) - 10)
+                  .attr("stroke", "black");
         });
