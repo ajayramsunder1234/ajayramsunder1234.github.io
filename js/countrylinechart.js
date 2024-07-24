@@ -125,7 +125,7 @@ function createLineChart(data, country) {
         .style("text-anchor", "middle")
         .text("Mean Years of Schooling");
 
-    const annotationData = filteredData.find(d => d.Year === 1950);
+    const annotationData = countryData.find(d => d.Year === 1950);
             
     svg.append("text")
         .attr("x", x(annotationData.Year) + 10)
