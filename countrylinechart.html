@@ -11,9 +11,10 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            height: 100vh;
             background: #f4f4f4;
         }
         #chart-container {
@@ -21,27 +22,70 @@
             border: 1px solid #ccc;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        #title {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px;
+        #chart {
+            background: white;
+        }
+        .legend {
+            font-size: 12px;
+        }
+        .tooltip {
+            position: absolute;
             text-align: center;
+            width: 80px;
+            height: 40px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
         }
         #annotation {
-            width: 960px;
-            margin: 20px auto;
-            font-size: 14px;
-            text-align: center;
+            margin-top: 20px;
+            width: 800px;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75em 1.5em;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div id="title">Mean Years of Schooling (1870-2020)</div>
-    <div id="chart-container"></div>
-    <select id="country-select"></select>
-    <div id="annotation">This line chart shows the mean years of schooling for the selected country from 1870 to 2020. The data is sourced from [source].</div>
+    <div id="chart-container">
+        <h1>World Average Years of Schooling (1870-2020)</h1>
+        <div id="chart"></div>
+        <select id="country-select"></select>
+        <div id="annotation">
+            <p>This chart displays the average years of education for different countries from 1870 to 2020.
+                The data shows trends and changes in educational attainment over time, highlighting significant increases.</p>
+        </div>
+    </div>
+    <div class="button-container">
+        <button id="next-button">Next</button>
+        <button id="back-button">Back</button>
+    </div>
     <script>
         // Load data and create the chart
         d3.csv("data/mean-years-of-schooling-long-run.csv").then(data => {

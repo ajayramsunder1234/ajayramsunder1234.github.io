@@ -8,7 +8,7 @@ document.getElementById("back-button").addEventListener("click", function() {
 const width = 960, height = 600;
 
 // Append the svg object to the body of the page
-const svg = d3.select("#map")
+const svg = d3.select("#chart")
               .append("svg")
               .attr("width", width)
               .attr("height", height);
