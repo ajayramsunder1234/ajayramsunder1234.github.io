@@ -130,7 +130,7 @@ const margin = { top: 20, right: 50, bottom: 50, left: 50 },
                 svg.append("line")
                 .attr("x1", x(annotationDataHighest.Year))
                 .attr("y1", y(annotationDataHighest.Education))
-                .attr("x2", x(annotationDataHighest.Year) - 240)
+                .attr("x2", x(annotationDataHighest.Year) - 150)
                 .attr("y2", y(annotationDataHighest.Education) + 30)
                 .attr("stroke", "black");
 
