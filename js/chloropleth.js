@@ -26,7 +26,7 @@ const path = d3.geoPath().projection(projection);
 const data = new Map();
 const colorScale = d3.scaleThreshold()
                      .domain([5, 10, 15, 20])
-                     .range(d3.schemeBlues[5]);
+                     .range(d3.schemeRdPu[5]);
 
 // Load external data and boot
 Promise.all([
